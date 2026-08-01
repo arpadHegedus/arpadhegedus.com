@@ -68,19 +68,30 @@ export default function Home() {
           </div>
         </div>
         <div className="section testimonial">
+          <span className="guide start"></span>
           <div className="main">
             <h2>Endorsements</h2>
             <div className="quotes">
-              <blockquote>
+              <blockquote className="type">
                 <p>Arpad doesn't just manage code; he owns the big picture. From translating complex Information Architecture into revenue-driving web assets to pioneering internal R&D, his strategic execution has significantly boosted our agency's technical capabilities and profit margins.</p>
                 <cite>CTO / Agency Director</cite>
+                <span className="guide horizontal start"></span>
+                <span className="guide vertical start"></span>
+                <span className="guide vertical end"></span>
+                <span className="guide horizontal end"></span>
               </blockquote>
-              <blockquote>
+              <span className="guide mid"></span>
+              <blockquote className="type">
                 <p>As a Tech Lead, Arpad creates environments developers thrive in. His mentorship, clear technical specifications, and strict TypeScript/Next.js code reviews didn't just cut our team's rework cycles by 40%—they made us better engineers.</p>
                 <cite>Full Stack Engineer (Mentee)</cite>
+                <span className="guide horizontal start"></span>
+                <span className="guide vertical start"></span>
+                <span className="guide vertical end"></span>
+                <span className="guide horizontal end"></span>
               </blockquote>
             </div>
           </div>
+          <span className="guide end"></span>
         </div>
         <div className="section technologies">
           <div className="main">
@@ -95,9 +106,9 @@ export default function Home() {
           </div>
         </div>
         <div className="section contact">
-          <div className="main">
-            <p><strong>Arpad</strong> Hegedus</p>
-            <p className="title">Lead Full Stack Developer & Tech Lead (Lead UX Architect)</p>
+          <div className="main type">
+            <p className="h1"><strong>Arpad</strong> Hegedus</p>
+            <p className="meta">Lead Full Stack Developer & Tech Lead (Lead UX Architect)</p>
             <div className="actions">
               <a className='primary-button'>Request a Consultation</a>
               <a className='cv-button'>Download CV <span>❯</span></a>

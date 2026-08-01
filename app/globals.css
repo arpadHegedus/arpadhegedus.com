@@ -1,7 +1,7 @@
 :root {
   --background: #0b0f0f;
   --color: #e6e6e6;
-  --guide: #f6f6f6;
+  --guide: #888;
   --primary: #a8e0eb;
   --dark: #1b2527;
   --guide-thickness: .125rem;
@@ -9,7 +9,7 @@
   --gutter: clamp(1.5rem, 5vw + 0rem, 3rem);
   --body: clamp(0.875rem, 1.25vw + 0.625rem, 1rem);
   --small: clamp(0.875rem, 0.86rem + 0.08vw, 0.95rem);
-  --spacing: 1.5em;
+  --spacing: 1.5rem;
   --padding: clamp(1.5rem, 8.333vw + -1rem, 4rem);
   --padding-large: clamp(1.5rem, 15vw + -3rem, 6rem);
   --h1: clamp(2.25rem, 1.7rem + 3vw, 5rem);
@@ -71,7 +71,8 @@ ul {
   padding-inline-start: 1.5em;
 }
 
-h1 {
+h1,
+.h1 {
   line-height: 1.1;
   font-size: var(--h1);
   font-weight: 100;
@@ -104,6 +105,17 @@ p.eyebrow {
 
 p.eyebrow + * {
   --spacing: 0.25em;
+}
+
+blockquote p {
+  font-style: italic;
+  font-size: 1.25rem;
+}
+
+cite {
+  font-style: normal;
+  font-weight: 400;
+  opacity: 0.75;
 }
 
 a {
@@ -284,4 +296,125 @@ a:focus {
 
 .principles .main .guide.vertical.end {
   right: 0;
+}
+
+
+.testimonial {
+  position: relative;
+  padding-block: 4rem;
+}
+
+.testimonial > .guide {
+  height: 4rem;
+  left: calc(50% - var(--guide-thickness) / 2);
+}
+
+.testimonial > .guide.start {
+  top: 0;
+}
+
+.testimonial > .guide.end {
+  bottom: 0;
+}
+
+.testimonial blockquote {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: var(--padding);
+  max-width: 50rem;
+  margin-inline: auto;
+}
+
+.testimonial blockquote p {
+  flex: 1 1 auto;
+}
+
+.testimonial blockquote cite {
+  flex: 0 1 auto;
+}
+
+.testimonial blockquote .guide.horizontal {
+  width: 100%;
+  left: 0;
+}
+
+.testimonial blockquote .guide.horizontal.start {
+  top: 0;
+}
+
+.testimonial blockquote .guide.horizontal.end {
+  bottom: 0;
+}
+
+.testimonial blockquote .guide.vertical {
+  top: 0;
+  height: 100%;
+}
+
+.testimonial blockquote .guide.vertical.start {
+  left: 0;
+}
+
+.testimonial blockquote .guide.vertical.end {
+  right: 0;
+}
+
+@media (width < 60rem) {
+
+  .testimonial .guide.mid {
+    position: relative;
+    width: var(--guide-thickness);
+    height: 1.5rem;
+    margin-inline: auto;
+  }
+}
+
+@media (width >= 60rem) {
+
+  .testimonial {
+    position: relative;
+  }
+
+  .testimonial > .guide.start {
+    top: 0;
+    height: 100%;
+  }
+
+  .testimonial > .guide.end {
+    top: calc(50% - var(--guide-dot) / 2);
+    left: calc(50% - var(--guide-dot) / 2);
+    width: var(--guide-dot);
+    height: var(--guide-dot);
+    border-radius: 50%;
+  }
+
+  .testimonial .guide.mid {
+    height: var(--guide-thickness);
+    width: 4rem;
+    margin-inline: auto;
+    top: calc(50% - var(--guide-thickness) / 2);
+    left: calc(50% - 2rem);
+  }
+
+  .testimonial .quotes {
+    display: grid;
+    grid-template-columns: minmax(1rem, 1fr) minmax(1rem, 1fr);
+    max-width: 70rem;
+    margin-inline: auto;
+    gap: 4rem;
+  }
+}
+
+.contact {
+  padding-block: 4rem;
+}
+
+.contact .h1,
+.contact .meta {
+  text-align: center;
+}
+
+.contact .actions {
+  justify-content: center;
 }
