@@ -1,0 +1,171 @@
+.projects {
+  position: relative;
+  padding-block: 4rem;
+}
+
+.projects > .guide.start,
+.projects > .guide.end {
+  height: 4rem;
+  left: calc(50% - var(--guide-thickness) / 2);
+}
+
+.projects > .guide.start {
+  top: 0;
+}
+
+.projects > .guide.end {
+  bottom: 0;
+}
+
+/* L-turn spans: mobile-only, hidden by default */
+.projects > .guide.start-h,
+.projects > .guide.end-h {
+  display: none;
+}
+
+.projects .main {
+  position: relative;
+}
+
+/* Box outline */
+.project {
+  position: relative;
+}
+
+.project > .guide.horizontal {
+  width: 100%;
+  left: 0;
+}
+
+.project > .guide.horizontal.start {
+  top: 0;
+}
+
+.project > .guide.horizontal.end {
+  bottom: 0;
+}
+
+.project > .guide.vertical {
+  top: 0;
+  height: 100%;
+}
+
+.project > .guide.vertical.start {
+  left: 0;
+}
+
+.project > .guide.vertical.end {
+  right: 0;
+}
+
+@media (width < 60rem) {
+
+  .projects .main {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-inline-start: 2rem;
+  }
+
+  /* Full-height vertical line at left: 0 of .main */
+  .projects .main > .guide.line {
+    left: 0;
+    top: 0;
+    height: 100%;
+  }
+
+  .projects .main > .guide.center {
+    display: none;
+  }
+
+  /* Horizontal turn: 50% (start) -> left line (x=0) */
+  .projects > .guide.start-h {
+    display: block;
+    top: calc(4rem - var(--guide-thickness) / 2);
+    left: 0;
+    width: 50%;
+    height: var(--guide-thickness);
+  }
+
+  /* Horizontal turn: left line (x=0) -> 50% (end) */
+  .projects > .guide.end-h {
+    display: block;
+    bottom: calc(4rem - var(--guide-thickness) / 2);
+    left: 0;
+    width: 50%;
+    height: var(--guide-thickness);
+  }
+
+  /* Dot centred on the left vertical line */
+  .project > .guide.dot {
+    width: var(--guide-dot);
+    height: var(--guide-dot);
+    border-radius: 50%;
+    left: calc(-2rem + var(--guide-thickness) / 2 - var(--guide-dot) / 2);
+    top: calc(50% - var(--guide-dot) / 2);
+  }
+
+  /* Short horizontal line bridging dot-right to box-left */
+  .project > .guide.connector {
+    height: var(--guide-thickness);
+    left: calc(-2rem + var(--guide-thickness) / 2 + var(--guide-dot) / 2);
+    width: calc(2rem - var(--guide-thickness) / 2 - var(--guide-dot) / 2);
+    top: calc(50% - var(--guide-thickness) / 2);
+  }
+}
+
+@media (width >= 60rem) {
+
+  .projects .main {
+    --gap: 4rem;
+    display: grid;
+    grid-template-columns: minmax(1rem, 1fr) minmax(1rem, 1fr);
+    gap: var(--gap);
+    max-width: 70rem;
+    margin-inline: auto;
+  }
+
+  .projects .main > .guide.line {
+    height: 100%;
+    top: 0;
+    left: calc(50% - var(--guide-thickness) / 2);
+  }
+
+  .projects .main > .guide.center {
+    width: var(--guide-dot);
+    height: var(--guide-dot);
+    border-radius: 50%;
+    top: calc(50% - var(--guide-dot) / 2);
+    left: calc(50% - var(--guide-dot) / 2);
+  }
+
+  .project > .guide.dot {
+    display: none;
+  }
+
+  /* Connector: extends from the inner corner of each box toward centre line */
+  .project > .guide.connector {
+    height: var(--guide-thickness);
+    width: calc(var(--gap) / 2);
+  }
+
+  /* Top row (1 & 2): connector aligns with box bottom edge, forming a Z with the centre line */
+  .project:nth-of-type(-n+2) > .guide.connector {
+    bottom: 0;
+  }
+
+  /* Bottom row (3 & 4): connector aligns with box top edge */
+  .project:nth-of-type(n+3) > .guide.connector {
+    top: 0;
+  }
+
+  /* Left column (1 & 3): connector extends right from box right edge */
+  .project:nth-of-type(odd) > .guide.connector {
+    left: 100%;
+  }
+
+  /* Right column (2 & 4): connector extends left from box left edge */
+  .project:nth-of-type(even) > .guide.connector {
+    right: 100%;
+  }
+}
