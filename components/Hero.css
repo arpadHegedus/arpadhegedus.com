@@ -1,5 +1,5 @@
 @keyframes hero-image {
-    70% {
+    20% {
         transform: translateY(3rem);        
         filter: blur(0.2rem) brightness(0);
         opacity: 0.6;
@@ -117,7 +117,8 @@
     .guide::before,
     .guide::after {
         margin: -3rem;
-        animation-range: exit -25% exit 100%;
+        /* animation-range: exit -25% exit 100%; */
+        animation-range: exit -6rem, exit 100%;
     }
 
     .dot {
@@ -127,17 +128,18 @@
     .hero {
         display: grid;
         grid-template-columns: minmax(1rem, 1fr) minmax(1rem, 1fr);
-        align-items: flex-start;
     }
 
     .hero .header {
         position: sticky;
+        display: grid;
+        align-items: center;
         top: 0;
         align-self: start;
-        padding: 2em;
+        padding: var(--padding) var(--padding) var(--padding) 0;
         animation-name: hero-image;
         animation-timeline: view(block);
-        animation-range: entry 100% exit 100%;
+        animation-range: exit;
     }
 
     .hero .main {
@@ -145,6 +147,7 @@
         justify-content: center;
         align-items: center;
         min-height: 100vh;
+        padding: var(--padding-large) 0 var(--padding-large) var(--padding-large);
         animation-name: hero-main;
         animation-timeline: view(block);
         animation-range: exit 0% exit 100%;
