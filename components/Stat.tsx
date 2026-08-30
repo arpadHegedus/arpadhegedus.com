@@ -72,7 +72,7 @@ export default function Stat({
 
     // Set the initial value using the UK locale format
     return (
-    <div>
+    <div className="stat">
         { pre && <span>{pre}</span> }
         <span ref={nodeRef}>{new Intl.NumberFormat('en-GB').format(from)}</span>
         { app && <span>{app}</span> }
