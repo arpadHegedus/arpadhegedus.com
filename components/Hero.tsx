@@ -6,7 +6,7 @@ import './Hero.css';
 
 export default function Hero() {
   return (
-    <div className="hero section">
+    <div className="hero section first">
         <Guide withDot />
         <div className="header">
             <Image

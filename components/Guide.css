@@ -33,7 +33,7 @@
     background: var(--guide);
     width: var(--guide-thickness);
     height: var(--guide-thickness);
-    animation-timeline: --section-timeline;
+    transition: none;
 }
 
 .guide::before,
@@ -43,7 +43,6 @@
     position: absolute;
     top: 0;
     left: 0;
-    animation-timeline: --section-timeline;
     transition: none;
     will-change: transform;
 }
@@ -63,6 +62,12 @@
     transform: scaleY(0);
 }
 
+.guide.start {
+    left: calc(50% - var(--guide-thickness) / 2);
+    top: 0;
+    height: var(--padding-large);
+}
+
 .dot {
     position: absolute;
     display: block;
@@ -71,7 +76,6 @@
     border-radius: 50%;
     background: #dfffdd;
     animation-name: dot;
-    animation-timeline: --section-timeline;
     transform: scale(0);
 }
 

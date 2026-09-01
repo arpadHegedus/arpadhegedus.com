@@ -1,0 +1,29 @@
+.section.text {
+    padding-block: var(--padding-large);
+}
+
+
+.section.text .guide {
+    bottom: 0;
+    right: calc(50% - var(--guide-thickness) / 2);
+}
+
+.section.text .guide.start::before,
+.section.text .guide.start::after {
+    width: calc(100% + 3rem);
+    height: calc(100% + 3rem);
+    margin: -6rem -3rem -3rem -3rem;
+}
+
+.section.text .guide.start::before {
+    animation-name: hero-guide-shine;
+}
+
+.section.text .guide.start::after {
+    animation-name: hero-guide-fill;
+}
+
+.section.text .guide.start::before,
+.section.text .guide.start::after {
+    animation-range: 0% 10%;
+}

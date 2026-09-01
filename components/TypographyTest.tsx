@@ -2,7 +2,7 @@
 
 export default function TypographyTest() {
   return (
-    <div className="typo">
+    <div className="typo section last">
         <p className="eyebrow">Eyebrow</p>
         <h1>Heading 1</h1>
         <h2>Heading 2</h2>

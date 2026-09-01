@@ -94,8 +94,10 @@
     transition-property: none;
     transition-timing-function: ease-in-out;
     transition-duration: 0.4s;
+    animation-fill-mode: both;
+    animation-range: cover;
+    animation-timeline: --section-timeline;
     animation-timing-function: linear;
-    animation-fill-mode: forwards;
 }
 
 html {
@@ -474,7 +476,16 @@ button.secondary:active {
 }
 
 .section {
+    position: relative;
     view-timeline-name: --section-timeline;
     view-timeline-axis: block;
-    view-timeline-inset: 50% 0%;
+    view-timeline-inset: 50% 50%;
+}
+
+.section.first {
+    view-timeline-inset: 50% 0;
+}
+
+.section.last {
+    view-timeline-inset: 0 50%;
 }
