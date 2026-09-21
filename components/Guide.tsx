@@ -19,10 +19,12 @@ export default function Guide({ className, withDot = false }: GuideProps) {
 export function GuideBorder() {
     return (
         <>
-            <Guide className="border top" />
-            <Guide className="border right" />
-            <Guide className="border bottom" />
-            <Guide className="border left" />
+            <Guide className="border left start" />
+            <Guide className="border right start" />
+            <Guide className="border down start" />
+            <Guide className="border down end" />
+            <Guide className="border right end" />
+            <Guide className="border left end" />
         </>
     );
 }

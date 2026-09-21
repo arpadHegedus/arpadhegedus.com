@@ -30,21 +30,6 @@
     }
 }
 
-@keyframes hero-guide-shine {
-    100% {
-        transform: translateY(100%);
-    }
-}
-
-@keyframes hero-guide-fill {
-    0% {
-        transform: translateY(3rem) scaleY(0);
-    }
-    100% {
-        transform: translateY(3rem) scaleY(1);
-    }
-}
-
 .hero {
     position: relative;
 }
@@ -55,46 +40,19 @@
     max-height: calc(100vh - 2 * var(--padding));
 }
 
-.hero .guide {
-    bottom: 0;
-    right: calc(50% - var(--guide-thickness) / 2);
-    height: 100%;
-}
-
-.hero .guide::before,
-.hero .guide::after {
-    width: calc(100% + 3rem);
-    height: calc(100% + 3rem);
-    margin: -3rem;
-}
-
-.hero .guide::before {
-    animation-name: hero-guide-shine;
-}
-
-.hero .guide::after {
-    animation-name: hero-guide-fill;
-}
-
 @media (width <= 60rem) {
 
     .hero .guide {
-        height: calc(2 * var(--padding-large));
+        clip-path: inset(calc(100% - 2 * var(--padding-large)) 0 0 0);
         opacity: 0;
         animation-name: fadein;
-        animation-range: 40% 70%;
-    }
-
-    .hero .guide::before,
-    .hero .guide::after {
-        margin: -6rem -3rem -3rem;
-        animation-range: 75% 100%;
+        animation-range: 45% 52%;
     }
 
     .hero .dot {
         bottom: calc(2 * var(--padding-large));
         left: calc(50% - var(--guide-dot) / 2);
-        animation-range: 70% 75%;
+        animation-range: 60% 65%;
         box-shadow: 0 0 5rem white;
     }
 
@@ -127,12 +85,6 @@
 }
 
 @media (width >= 60rem) {
-
-    .hero .guide::before,
-    .hero .guide::after {
-        margin: -3rem;
-        animation-range: exit 0, exit 100%;
-    }
 
     .hero .dot {
         display: none;

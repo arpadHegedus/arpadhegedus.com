@@ -7,7 +7,7 @@ import './Hero.css';
 export default function Hero() {
   return (
     <div className="hero section first">
-        <Guide withDot />
+        <Guide className="down" withDot />
         <div className="header">
             <Image
                 src="/arpad.webp"

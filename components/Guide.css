@@ -2,7 +2,9 @@
     --guide: var(--canvas);
     --guide-thickness: .125rem;
     --guide-dot: 0.5rem;
-    --guide-glow: radial-gradient(circle at 3rem 3rem, #a8e0eb 0em, #dfffdd 0.5em, #a8e0eb 1em, #1B2527 3em);
+    --guide-glow: radial-gradient(circle at 0 0, #a8e0eb 0em, #a8e0eb 1em, #1B2527 3em);
+    --guide-glow-right: radial-gradient(circle at calc(100% - 3em) 0, #a8e0eb 0em, #a8e0eb 1em, #1b2527 3em);
+    --guide-glow-left: radial-gradient(circle at 3em 0, #a8e0eb 0em, #a8e0eb 1em, #1B2527 3em);
     --guide-fill: linear-gradient(0deg, #a8e0eb 0%, #62d7ee 50%, #a8e0eb 100%);
 }
 
@@ -26,6 +28,63 @@
     }
 }
 
+@keyframes guide-down {
+    0% {
+        transform: translateY(0rem);
+    }
+    100% {
+        transform: translateY(calc(100% + 3rem));
+    }
+}
+
+
+@keyframes guide-down-first-mobile {
+    0% {
+        transform: translateY(3rem);
+    }
+    
+    44% {
+        transform: translateY(100%);
+    }
+    
+    100% {
+        transform: translateY(calc(150% + 3rem));
+    }
+}
+
+@keyframes guide-down-first {
+    0% {
+        transform: translateY(3rem);
+    }
+    
+    45% {
+        transform: translateY(100%);
+    }
+    
+    100% {
+        transform: translateY(calc(150% + 3rem));
+    }
+}
+
+
+@keyframes guide-right {
+    0% {
+        transform: translateX(calc(-100% - 3rem));
+    }
+    100% {
+        transform: translateX(0rem);
+    }
+}
+
+@keyframes guide-left {
+    0% {
+        transform: translateX(calc(100% + 3rem));
+    }
+    100% {
+        transform: translateX(0rem);
+    }
+}
+
 .guide {
     position: absolute;
     overflow: hidden;
@@ -41,31 +100,123 @@
     content: '';
     display: block;
     position: absolute;
-    top: 0;
-    left: 0;
+    width: 100%;
+    height: 100%;
     transition: none;
     will-change: transform;
 }
 
 .guide::before {
-    width: calc(100% + 3rem);
-    height: calc(100% + 3rem);
-    margin: -3rem;
     background: var(--guide-glow);
 }
 
 .guide::after {
-    width: 100%;
-    height: 100%;
     background: var(--guide-fill);
-    transform-origin: 0 0;
     transform: scaleY(0);
 }
 
-.guide.start {
-    left: calc(50% - var(--guide-thickness) / 2);
+.guide.down {
     top: 0;
-    height: var(--padding-large);
+    left: calc(50% - var(--guide-thickness) / 2);
+    height: 100%;
+}
+
+.guide.down::before,
+.guide.down::after {
+    left: 0;
+    animation-name: guide-down;
+    animation-range: -3rem 100%;
+    margin-block-start: -3rem;
+}
+
+.guide.down::before {
+    top: 0;
+}
+
+.guide.down::after {
+    bottom: calc(100% + 2.5rem);
+}
+
+.section.first .guide.down::before,
+.section.first .guide.down::after {
+    animation-name: guide-down-first;
+    animation-range: contain 0% exit 100%;
+}
+
+@media (width <= 60rem) {
+    .section.first .guide.down::before,
+    .section.first .guide.down::after {
+        animation-name: guide-down-first-mobile;
+    }
+}
+
+.guide.down.start:not(.border) {
+    clip-path: inset(0 0 calc(100% - var(--padding-large)) 0);
+}
+
+.guide.down.end:not(.border) {
+    clip-path: inset(calc(100% - var(--padding-large)) 0 0 0);
+}
+
+.guide.left,
+.guide.right {
+    width: 100%;
+    top: 0;
+    height: var(--guide-thickness);
+}
+
+.guide.left::before,
+.guide.left::after {
+    left: 0;
+    animation-name: guide-left;
+    animation-range: -3rem 100%;
+}
+
+.guide.left::before {
+    background: var(--guide-glow-left);
+    margin-inline-start: -3rem;
+}
+
+.guide.right::before,
+.guide.right::after {
+    right: 0;
+    animation-name: guide-right;
+    animation-range: -3rem 100%;
+}
+
+.guide.right::before {
+    background: var(--guide-glow-right);
+    margin-inline-end: -3rem;
+}
+
+.guide.border.left {
+    right: calc(50% - var(--guide-thickness) / 2);
+    width: calc(50% - var(--guide-thickness) / 2)
+}
+
+.guide.border.right {
+    left: calc(50% - var(--guide-thickness) / 2);
+    width: calc(50% - var(--guide-thickness) / 2)
+}
+
+.guide.border.left.end,
+.guide.border.right.end {
+    bottom: 0;
+}
+
+.guide.border.left.end,
+.guide.border.right.end {
+    top: auto;
+    bottom: 0;
+}
+
+.guide.border.down.start {
+    left: 0;
+}
+
+.guide.border.down.end {
+    right: 0;
+    left: auto;
 }
 
 .dot {

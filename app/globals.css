@@ -475,17 +475,23 @@ button.secondary:active {
     flex-wrap: wrap;
 }
 
-.section {
+.section,
+.just-section {
     position: relative;
     view-timeline-name: --section-timeline;
     view-timeline-axis: block;
     view-timeline-inset: 50% 50%;
 }
 
-.section.first {
-    view-timeline-inset: 50% 0;
+.section.first,
+.just-section.first {
+    view-timeline-inset: 0;
 }
 
 .section.last {
     view-timeline-inset: 0 50%;
+}
+
+.just-section.first {
+    view-timeline-inset: none;
 }
