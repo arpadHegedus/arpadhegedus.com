@@ -18,14 +18,14 @@
 
 @keyframes hero-main {
     0% {
-        transform: translateY(0);
+        transform: translateY(-2rem);
     }
     50% {
-        transform: translateY(6rem);
+        transform: translateY(0);
         opacity: 1;
     }
     100% {
-        transform: translateY(12rem);
+        transform: translateY(2rem);
         opacity: 0;
     }
 }
@@ -34,27 +34,36 @@
     position: relative;
 }
 
+.hero .proof {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: var(--small);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.hero .proof li {
+    margin: 0;
+}
+
+.hero .proof strong {
+    font-size: var(--h4);
+    font-weight: 400;
+    letter-spacing: 0;
+    color: var(--primary);
+}
+
 .hero .header img {
     width: auto;
     margin-inline: auto;
     max-height: calc(100vh - 2 * var(--padding));
 }
 
-@media (width <= 60rem) {
-
-    .hero .guide {
-        clip-path: inset(calc(100% - 2 * var(--padding-large)) 0 0 0);
-        opacity: 0;
-        animation-name: fadein;
-        animation-range: 45% 52%;
-    }
-
-    .hero .dot {
-        bottom: calc(2 * var(--padding-large));
-        left: calc(50% - var(--guide-dot) / 2);
-        animation-range: 60% 65%;
-        box-shadow: 0 0 5rem white;
-    }
+@media (width < 60rem) {
 
     .hero {
         display: flex;
@@ -79,16 +88,13 @@
         --spacing: 0.5rem;
     }
 
-    .hero .actions {
+    .hero .actions,
+    .hero .proof {
         justify-content: center;
     }
 }
 
 @media (width >= 60rem) {
-
-    .hero .dot {
-        display: none;
-    }
 
     .hero {
         display: grid;

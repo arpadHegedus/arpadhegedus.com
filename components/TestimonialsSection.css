@@ -1,0 +1,79 @@
+.testimonials {
+    padding-block: var(--padding-large);
+}
+
+.testimonial-grid {
+    display: grid;
+    gap: 3rem;
+    max-width: 70rem;
+    margin-inline: auto;
+}
+
+.testimonial-card {
+    position: relative;
+    /* clip, not hidden: hidden makes a scroll container, which would scope the
+       text reveal to the card instead of the viewport. */
+    overflow: clip;
+    padding: var(--padding);
+    view-timeline: --quote block;
+}
+
+.testimonial-card cite {
+    display: block;
+    --reveal-delay: 5%;
+}
+
+.testimonial-card .typo {
+    position: relative;
+    z-index: 1;
+}
+
+.testimonial-card::after {
+    content: '\201D';
+    position: absolute;
+    right: -1rem;
+    bottom: -9rem;
+    z-index: 0;
+    font-family: Times, serif;
+    font-size: 16rem;
+    line-height: 1;
+    color: var(--primary);
+    opacity: 0.08;
+    pointer-events: none;
+    animation-name: quote-mark-reveal;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+    animation-timeline: view();
+    animation-range: cover 40% cover 70%;
+}
+
+@keyframes quote-mark-reveal {
+    from { opacity: 0; transform: scale(0.92); }
+    to { opacity: 0.08; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .testimonial-card::after {
+        animation: none;
+    }
+}
+
+@media (width >= 60rem) {
+    .testimonial-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 5rem;
+    }
+
+    /* Side by side, so let the second card follow the first. */
+    .testimonial-card:nth-child(2) {
+        --reveal-delay: 4%;
+    }
+
+    .testimonial-card:nth-child(2) cite {
+        --reveal-delay: 9%;
+    }
+
+    .testimonial-card:nth-child(2)::after {
+        animation-range: cover 30% cover 54%;
+    }
+}

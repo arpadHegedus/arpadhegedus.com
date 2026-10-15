@@ -1,0 +1,34 @@
+.technologies {
+    padding-block: var(--padding-large);
+}
+
+.technology-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem 5rem;
+    justify-items: center;
+    max-width: 20rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+}
+
+.technology-circle {
+    display: grid;
+    place-items: center;
+    width: min(100%, 5rem);
+    aspect-ratio: 1;
+}
+
+.technology-circle svg {
+    width: 40%;
+    height: 40%;
+    color: var(--primary);
+}
+
+@media (width >= 60rem) {
+    .technology-grid {
+        grid-template-columns: repeat(8, minmax(0, 1fr));
+        max-width: 72rem;
+        gap: 1rem;
+    }
+}

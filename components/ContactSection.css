@@ -1,0 +1,17 @@
+.contact {
+    padding-block: var(--padding-large) calc(var(--padding-large) + 30svh);
+    text-align: center;
+}
+
+.contact .actions {
+    justify-content: center;
+}
+
+.contact .actions svg {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.contact .actions.social {
+    gap: 1.5rem;
+}

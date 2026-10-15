@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local-only working files: design sources, AI chats, CVs, old prototypes
+/.local/
+/.dev/

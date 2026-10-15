@@ -1,6 +1,3 @@
-'use client';
-
-import Guide, { GuideBorder } from './Guide';
 import './TextSection.css';
 
 type TextSectionProps = {
@@ -9,15 +6,12 @@ type TextSectionProps = {
 
 export default function TextSection({ children }: TextSectionProps) {
   return (
-    <div className="text section">
-        <Guide className="down start" />
-        <div className="main">
-            <GuideBorder />
+    <div className="text section" data-guide-section="frame">
+        <div className="main" data-guide-frame>
             <div className="typo">
                 {children}
             </div>
         </div>
-        <Guide className="down end" />
     </div>
   );
 }

@@ -1,0 +1,36 @@
+.highlights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 2rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.highlights li {
+    display: flex;
+    flex-direction: column;
+}
+
+.highlights strong {
+    font-size: var(--h2);
+    font-weight: 200;
+    line-height: 1.1;
+    color: var(--primary);
+}
+
+.highlights span {
+    font-size: var(--small);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--off);
+}
+
+.case-next {
+    padding: var(--padding-large) var(--gutter) 0;
+    text-align: center;
+}
+
+.case-next a {
+    font-size: var(--h3);
+}

@@ -8,31 +8,3 @@
     margin-inline: auto;
     padding: var(--padding-large);
 }
-
-.section.text .main .guide.down::before,
-.section.text .main .guide.down::after {    
-    animation-range: calc(1.875 * var(--padding-large)) calc(100% - 2.75 * var(--padding-large));
-}
-
-.section.text .main .guide.start.left::before,
-.section.text .main .guide.start.left::after,
-.section.text .main .guide.start.right::before,
-.section.text .main .guide.start.right::after {    
-    animation-range: 3rem calc(2 * var(--padding-large));
-}
-
-.section.text .main .guide.end.left::before,
-.section.text .main .guide.end.left::after,
-.section.text .main .guide.end.right::before,
-.section.text .main .guide.end.right::after {    
-    animation-range: calc(100% - 3 * var(--padding-large)) calc(100% - 1.35 * var(--padding-large));
-}
-
-.section.text .main .guide.end.left {
-    right: 0;
-    width: calc(50% - var(--guide-thickness) / 2 + 2px);
-}
-
-.section.text .main .guide.end.right {
-    left: 0;
-}

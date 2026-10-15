@@ -1,0 +1,24 @@
+.case-header {
+    display: grid;
+    place-items: center;
+    min-height: 70svh;
+    padding: var(--padding-large) var(--gutter) calc(2 * var(--padding-large));
+    text-align: center;
+}
+
+.case-header .typo {
+    max-width: 44rem;
+}
+
+.case-header h1 {
+    font-size: var(--h2);
+    font-weight: 200;
+    letter-spacing: 0.05em;
+    line-height: 1.2;
+}
+
+.case-header .tagline {
+    font-size: var(--h3);
+    font-weight: 300;
+    color: var(--off);
+}

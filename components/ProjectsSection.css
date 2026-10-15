@@ -1,0 +1,152 @@
+.projects {
+    padding-block: var(--padding-large);
+}
+
+.projects-grid {
+    display: grid;
+    gap: 3rem;
+    padding-inline-start: 2rem;
+    max-width: 70rem;
+    margin-inline: auto;
+}
+
+.project-card {
+    position: relative;
+    isolation: isolate;
+    padding: var(--padding);
+}
+
+.project-card .stat {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    line-height: 1.1;
+    font-size: var(--h2);
+    font-weight: 700;
+}
+
+.project-card .stat-unit {
+    margin-inline-start: 0.4em;
+    font-size: var(--h4);
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    color: var(--primary);
+}
+
+.project-card .card-link {
+    color: inherit;
+    text-decoration: none;
+}
+
+.project-card .card-link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+}
+
+.project-card .card-link:focus-visible {
+    outline: none;
+}
+
+.project-card:has(.card-link:focus-visible) {
+    outline: 2px solid var(--primary-on);
+    outline-offset: 4px;
+}
+
+.project-card .card-cta {
+    font-size: var(--small);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--primary);
+}
+
+.project-card .card-cta::after {
+    content: '\2192';
+    display: inline-block;
+    margin-inline-start: 0.5em;
+    transition: transform 0.2s ease;
+}
+
+.project-card:hover .card-cta::after {
+    transform: translateX(0.25em);
+}
+
+/* Mobile: one full-width sweep, left edge solid first, right edge stays soft.
+   The range starts partway into "entry" so it roughly follows the guide's
+   glow reaching the card rather than the card merely touching the viewport. */
+.project-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-repeat: no-repeat;
+    background-size: 200% 100%;
+    /* Alpha ramp (50%-66.6%) follows a quintic smootherstep curve (zero slope
+       and curvature at both ends) sampled at 9 points, so the fade-in reads
+       as an organic ease rather than a straight ramp. */
+    background-image: linear-gradient(
+        to left,
+        rgba(98, 215, 238, 0) 0%, rgba(98, 215, 238, 0) 50%,
+        rgba(98, 215, 238, 0.002) 52.08%, rgba(98, 215, 238, 0.010) 54.15%,
+        rgba(98, 215, 238, 0.028) 56.23%, rgba(98, 215, 238, 0.05) 58.3%,
+        rgba(98, 215, 238, 0.073) 60.38%, rgba(98, 215, 238, 0.09) 62.45%,
+        rgba(98, 215, 238, 0.098) 64.53%, rgba(98, 215, 238, 0.1) 66.6%,
+        rgba(59, 130, 246, 0.1) 100%
+    );
+    animation-name: project-card-fill-in;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: view();
+    animation-range: cover 40% cover 79%;
+}
+
+@keyframes project-card-fill-in {
+    from { background-position: 100% 0; }
+    to { background-position: 0% 0; }
+}
+
+@keyframes project-card-fill-out {
+    from { background-position: 0% 0; }
+    to { background-position: 100% 0; }
+}
+
+@supports not (animation-timeline: view()) {
+    .project-card::before {
+        background-position: 0% 0;
+    }
+}
+
+@media (width >= 60rem) {
+    .projects-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 5rem;
+        padding-inline-start: 0;
+    }
+
+    /* Desktop: both columns grow from the page's shared centerline outward,
+       not each card's own center. Left column fills right-to-left (toward
+       the outer edge), right column left-to-right, mirroring it. */
+    .project-card::before {
+        animation-range: cover 36% cover 72%;
+    }
+
+    .project-card:nth-child(odd)::before {
+        background-image: linear-gradient(
+            to right,
+            rgba(98, 215, 238, 0) 0%, rgba(98, 215, 238, 0) 50%,
+            rgba(98, 215, 238, 0.002) 52.08%, rgba(98, 215, 238, 0.010) 54.15%,
+            rgba(98, 215, 238, 0.028) 56.23%, rgba(98, 215, 238, 0.05) 58.3%,
+            rgba(98, 215, 238, 0.073) 60.38%, rgba(98, 215, 238, 0.09) 62.45%,
+            rgba(98, 215, 238, 0.098) 64.53%, rgba(98, 215, 238, 0.1) 66.6%,
+            rgba(59, 130, 246, 0.1) 100%
+        );
+        animation-name: project-card-fill-out;
+    }
+
+    @supports not (animation-timeline: view()) {
+        .project-card:nth-child(odd)::before {
+            background-position: 100% 0;
+        }
+    }
+}

@@ -210,6 +210,10 @@ p.title {
     text-transform: uppercase;
 }
 
+p.title {
+    font-size: var(--h4);
+}
+
 p.lead {
     line-height: 1.625;
     font-size: var(--h4);
@@ -465,6 +469,34 @@ button.secondary:active {
 .typo li + li,
 .typo li ul {
     margin-block-start: 0.2em;
+}
+
+.typo > * {
+    animation-name: typo-child-reveal;
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+    animation-timeline: view();
+    animation-range: cover calc(3% + var(--reveal-delay, 0%)) cover calc(24% + var(--reveal-delay, 0%));
+}
+
+@keyframes typo-child-reveal {
+    from { opacity: 0; transform: translateY(1.75rem); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@supports not (animation-timeline: view()) {
+    .typo > * {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .typo > * {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
 }
 
 .actions {

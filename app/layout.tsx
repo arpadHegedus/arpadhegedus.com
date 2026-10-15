@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Commissioner } from "next/font/google";
+import { profile } from "@/content/profile";
 import "./globals.css";
 
 const commissioner = Commissioner({
@@ -8,8 +9,20 @@ const commissioner = Commissioner({
 });
 
 export const metadata: Metadata = {
-  title: "Arpad Hegedus | UX Architect",
-  description: "UK based engineer with a focus on user-centered design and digital product development.",
+  metadataBase: new URL(profile.siteUrl),
+  title: {
+    default: `${profile.name} | ${profile.jobTitle}`,
+    template: `%s | ${profile.name}`,
+  },
+  description: profile.description,
+  openGraph: {
+    type: "website",
+    locale: "en_GB",
+    siteName: profile.name,
+    title: `${profile.name} | ${profile.jobTitle}`,
+    description: profile.description,
+  },
+  twitter: { card: "summary" },
 };
 
 export default function RootLayout({
@@ -18,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={commissioner.variable}>
+    <html lang="en-GB" className={commissioner.variable}>
       <body>{children}</body>
     </html>
   );

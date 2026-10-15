@@ -6,76 +6,58 @@ interface StatProps {
     number: number;
     from?: number;
     active?: boolean;
-    duration?: number; // Duration in milliseconds
+    duration?: number;
     pre?: string;
     app?: string;
+    unit?: string;
 }
 
-export default function Stat({
-    number,
-    from = 0,
-    active = false,
-    duration = 1500,
-    pre,
-    app,
-}: StatProps) {
+const format = (value: number) => new Intl.NumberFormat('en-GB').format(value);
+const easeOutExpo = (t: number) => (t === 1 ? 1 : 1 - Math.pow(2, -10 * t));
+
+export default function Stat({ number, from = 0, active = false, duration = 1500, pre, app, unit }: StatProps) {
+    const rootRef = useRef<HTMLDivElement>(null);
     const nodeRef = useRef<HTMLSpanElement>(null);
 
     useEffect(() => {
-        // Only run if active is true
-        if (!active) return;
+        const root = rootRef.current;
+        const node = nodeRef.current;
+        if (!active || !root || !node) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-        let startTime: number | null = null;
-        let animationFrameId: number;
-
-        // Easing function for a more natural slow-down at the end (Ease Out Expo)
-        const easeOutExpo = (t: number): number => {
-            return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+        let frame = 0;
+        const run = () => {
+            let startTime: number | null = null;
+            const tick = (now: number) => {
+                startTime ??= now;
+                const progress = Math.min((now - startTime) / duration, 1);
+                const value = progress === 1 ? number : Math.floor(easeOutExpo(progress) * (number - from) + from);
+                node.textContent = format(value);
+                if (progress < 1) frame = requestAnimationFrame(tick);
+            };
+            node.textContent = format(from);
+            frame = requestAnimationFrame(tick);
         };
 
-        const animate = (currentTime: number) => {
-            if (!startTime) startTime = currentTime;
-            
-            // Calculate how much time has passed (0 to 1)
-            const progress = Math.min((currentTime - startTime) / duration, 1);
-            const easedProgress = easeOutExpo(progress);
+        const observer = new IntersectionObserver(([entry]) => {
+            if (!entry.isIntersecting) return;
+            observer.disconnect();
+            run();
+        }, { threshold: 0.6 });
+        observer.observe(root);
 
-            // Calculate the current value based on progress
-            const currentValue = Math.floor(easedProgress * (number - from) + from);
-
-            // Update the DOM directly for maximum performance
-            if (nodeRef.current) {
-                nodeRef.current.textContent = new Intl.NumberFormat('en-GB').format(currentValue);
-            }
-
-            // If we haven't reached the end, request another frame
-            if (progress < 1) {
-                animationFrameId = requestAnimationFrame(animate);
-            } else {
-                // Ensure the final frame lands exactly on the target number
-                if (nodeRef.current) {
-                    nodeRef.current.textContent = new Intl.NumberFormat('en-GB').format(number);
-                }
-            }
-        };
-
-        // Start the animation
-        animationFrameId = requestAnimationFrame(animate);
-
-        // Cleanup function to cancel the animation if the component unmounts
         return () => {
-            if (animationFrameId) {
-                cancelAnimationFrame(animationFrameId);
-            }
+            observer.disconnect();
+            cancelAnimationFrame(frame);
         };
     }, [active, number, from, duration]);
 
-    // Set the initial value using the UK locale format
     return (
-    <div className="stat">
-        { pre && <span>{pre}</span> }
-        <span ref={nodeRef}>{new Intl.NumberFormat('en-GB').format(from)}</span>
-        { app && <span>{app}</span> }
-    </div>
+        <div className="stat" ref={rootRef}>
+            {pre && <span className="stat-pre">{pre}</span>}
+            <span className="stat-number" ref={nodeRef}>{format(number)}</span>
+            {app && <span className="stat-app">{app}</span>}
+            {unit && <span className="stat-unit">{unit}</span>}
+        </div>
     );
 }
