@@ -1,7 +1,14 @@
 import type { Metadata } from "next";
 import { Commissioner } from "next/font/google";
 import { profile } from "@/content/profile";
-import "./globals.css";
+import "@/styles/tokens.css";
+import "@/styles/reset.css";
+import "@/styles/base.css";
+import "@/styles/glow.css";
+import "@/styles/typography.css";
+import "@/styles/interactive.css";
+import "@/styles/prose.css";
+import "@/styles/layout.css";
 
 const commissioner = Commissioner({
   variable: "--font-commissioner",

@@ -1,10 +1,10 @@
 import type { ReactNode } from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import Guide from './Guide';
-import TextSection from './TextSection';
+import Guide from '@/components/guide/Guide';
+import TextSection from '@/components/ui/TextSection';
 import CaseStudyHeader from './CaseStudyHeader';
-import ContactSection from './ContactSection';
+import ContactSection from '@/components/sections/ContactSection';
 import { notFound } from 'next/navigation';
 import { caseStudiesLive, projects, type Project } from '@/content/projects';
 import { profile, projectEnquiry, roleEnquiry } from '@/content/profile';
@@ -36,20 +36,22 @@ export default function CaseStudy({ project, highlights, children }: {
     return (
         <>
             <Guide>
-                <CaseStudyHeader project={project} />
-                <TextSection>
-                    <p className="eyebrow">{project.sector}</p>
-                    <ul className="highlights">
-                        {highlights.map(({ value, label }) => (
-                            <li key={label}><strong>{value}</strong> <span>{label}</span></li>
-                        ))}
-                    </ul>
-                    {children}
-                    <div className="actions">
-                        <a className="button" href={roleEnquiry}>Hiring? Let&apos;s talk</a>
-                        <a className="button-secondary" href={projectEnquiry}>Need something similar?</a>
-                    </div>
-                </TextSection>
+                <main>
+                    <CaseStudyHeader project={project} />
+                    <TextSection>
+                        <p className="eyebrow">{project.sector}</p>
+                        <ul className="highlights">
+                            {highlights.map(({ value, label }) => (
+                                <li key={label}><strong>{value}</strong> <span>{label}</span></li>
+                            ))}
+                        </ul>
+                        {children}
+                        <div className="actions">
+                            <a className="button" href={roleEnquiry}>Hiring? Let&apos;s talk</a>
+                            <a className="button-secondary" href={projectEnquiry}>Need something similar?</a>
+                        </div>
+                    </TextSection>
+                </main>
             </Guide>
             <nav className="case-next" aria-label="Next case study">
                 <p className="meta">Next case study</p>

@@ -1,9 +1,5 @@
+import { testimonials } from '@/content/testimonials';
 import './TestimonialsSection.css';
-
-const testimonials = [
-    { quote: 'Great work connects the big picture with the smallest details.', cite: 'A shared perspective' },
-    { quote: 'Thoughtful collaboration turns complex challenges into clear, human experiences.', cite: 'A lasting partnership' },
-];
 
 export default function TestimonialsSection() {
     return (

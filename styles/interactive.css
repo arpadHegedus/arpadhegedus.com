@@ -1,0 +1,189 @@
+@layer components {
+    a {
+        color: var(--primary);
+        text-decoration: none;
+        transition-property: color;
+    }
+
+    a:hover,
+    a:focus {
+        color: currentColor;
+    }
+
+    a:not([class]) {
+        position: relative;
+        display: inline-block;
+    }
+
+    a:not([class])::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: currentColor;
+        transform: scaleX(0);
+        transition-property: transform, background-color;
+    }
+
+    a:not([class]):hover::before,
+    a:not([class]):focus::before {
+        transform: scaleX(1);
+    }
+
+    a.button,
+    button:not([class]),
+    a.button-secondary,
+    button.secondary {
+        appearance: none;
+        display: inline-flex;
+        border: 0;
+        padding: 0.75em 1.75em;
+        cursor: pointer;
+        line-height: 1.2;
+        font-size: var(--small);
+        font-weight: 450;
+        letter-spacing: 0.025em;
+        text-align: center;
+        text-transform: uppercase;
+        border: 1px solid transparent;
+        border-radius: 0.25em;
+        transition-property: background-color, color;
+    }
+
+    a.button,
+    button:not([class]) {
+        isolation: isolate; 
+        position: relative;
+        overflow: hidden;
+        background: var(--grad-accent-ocean);
+        color: var(--background);
+        transition-property: box-shadow;
+    }
+
+    a.button::before,
+    button:not([class])::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background: var(--grad-accent-mint);
+        opacity: 0;
+        transition-property: opacity;
+    }
+
+    a.button::after,
+    button:not([class])::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        z-index: 2;
+        background: var(--base); 
+        transform: scaleX(0);
+        opacity: 0;
+        transition-property: transform, opacity;
+    }
+
+    a.button:hover,
+    a.button:focus,
+    button:not([class]):hover,
+    button:not([class]):focus {
+        box-shadow: var(--glow-hover);
+    }
+
+    a.button:hover::before,
+    a.button:focus::before,
+    button:not([class]):hover::before,
+    button:not([class]):focus::before {
+        opacity: 1;
+    }
+
+    a.button:hover::after,
+    a.button:focus::after,
+    button:not([class]):hover::after,
+    button:not([class]):focus::after {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+
+    a.button:active,
+    button:not([class]):active {
+        box-shadow: none;
+    }
+
+    a.button-secondary,
+    button.secondary {
+        padding: calc(0.75em - 1px) calc(1.75em - 1px);
+        position: relative;
+        isolation: isolate;
+        color: var(--primary-on);
+        border: 2px solid transparent;
+        background: linear-gradient(var(--canvas), var(--canvas)) padding-box,
+                    var(--grad-accent-ocean) border-box;
+        transition-property: box-shadow, color;
+    }
+
+    a.button-secondary::before,
+    button.secondary::before {
+        content: '';
+        position: absolute;
+        inset: -2px; 
+        border-radius: inherit;
+        z-index: -1;
+        pointer-events: none;
+        border: 2px solid transparent;
+        background: linear-gradient(var(--canvas), var(--canvas)) padding-box,
+                    var(--grad-accent-mint) border-box;
+        opacity: 0;
+        transition-property: opacity;
+    }
+
+    a.button-secondary::after,
+    button.secondary::after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        z-index: 2;
+        color: var(--base);
+        background: var(--base);
+        border-radius: inherit;
+        transform: scaleX(0);
+        opacity: 0;
+        transition-property: transform, opacity;
+    }
+
+    a.button-secondary:hover,
+    a.button-secondary:focus,
+    button.secondary:hover,
+    button.secondary:focus {
+        box-shadow: var(--glow-hover);
+        color: var(--base);
+    }
+
+    a.button-secondary:hover::before,
+    a.button-secondary:focus::before,
+    button.secondary:hover::before,
+    button.secondary:focus::before {
+        opacity: 1;
+    }
+
+    a.button-secondary:hover::after,
+    a.button-secondary:focus::after,
+    button.secondary:hover::after,
+    button.secondary:focus::after {
+        transform: scaleX(1);
+        opacity: 1;
+    }
+
+    a.button-secondary:active,
+    button.secondary:active {
+        box-shadow: var(--shadow-modal);
+    }
+}

@@ -3,7 +3,7 @@ import test from 'node:test';
 import {
     buildGuideLayout, guideDistanceAt, routeDistanceAt, dotProgressAt, fadeDistances,
     DOT_TRAVEL, FADE_STEPS, TIP_FADE,
-} from '../components/guide-geometry.ts';
+} from '../components/guide/geometry.ts';
 
 const HALF_STROKE = 0.5;
 const HERO_DOT_DROP = 96;

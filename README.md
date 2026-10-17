@@ -22,8 +22,8 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 
 ## Scroll guides
 
-[Guide](./components/Guide.tsx) wraps the page's guided sections. It draws
-one SVG overlay: dark tracks and a teal fill masked by connected, branching
+[Guide](./components/guide/Guide.tsx) wraps the page's guided sections. It draws
+one SVG overlay: an (invisible) track and a teal fill masked by connected, branching
 routes. Line tips have a short alpha fade, not a luminous leading edge.
 Only junction dots glow. There are no independent CSS line animation ranges.
 
@@ -79,12 +79,35 @@ Only junction dots glow. There are no independent CSS line animation ranges.
 
 Keep frames centred inside the wrapper so both routes have equal lengths.
 The geometry and progress mapping live in
-[guide-geometry.ts](./components/guide-geometry.ts).
-The remaining wireframe markup and responsive layout are in
-[WireframeSections.tsx](./components/WireframeSections.tsx) and
-[WireframeSections.css](./components/WireframeSections.css).
+[geometry.ts](./components/guide/geometry.ts).
+The section markup and responsive layout live in
+[components/sections](./components/sections), each with its own CSS file.
 Run `npm test` with Node 22.6+ for route continuity, dot sequencing, hero-start,
 reverse-scroll, resize, and fade regressions.
+
+## Deploying
+
+The site is a static export (`output: 'export'`), so any web server can host it.
+
+1. `npm run package` builds the site and writes `dist/arpadhegedus-site-<date>.zip`.
+2. Unzip it into the web root (the folder served as `https://arpadhegedus.com/`).
+   The zip includes an Apache `.htaccess` (compression, caching, security headers,
+   404 page); nginx ignores it and needs the equivalent in its own config.
+
+Notes:
+
+- `npm run package` strips the Next/React client runtime from the export
+  (`scripts/finalize-export.mjs`) and inlines one small script built from
+  `runtime/main.ts` (scroll guide and stat counters, shared with the React components
+  in `next dev`). This removes Lighthouse's "legacy" and "unused JavaScript" warnings.
+  Pages are plain HTML; links between pages are normal navigations. Set
+  `KEEP_NEXT_RUNTIME=1` to ship the full Next runtime instead (needed if you add
+  client-only features that depend on React, such as forms with state).
+- The portrait sizes in `public/arpad-<width>.webp` are generated from
+  `assets/arpad.webp` by `npm run images`; `image-loader.ts` picks between them
+  because a static export has no image optimiser.
+- Case-study pages are left out of the zip (they would answer 200 with a 404 page)
+  until `caseStudiesLive` in `content/projects.ts` is `true`.
 
 ## Learn More
 

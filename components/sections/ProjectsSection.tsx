@@ -1,6 +1,6 @@
 import { ViewTransition } from 'react';
 import Link from 'next/link';
-import Stat from './Stat';
+import Stat from '@/components/ui/Stat';
 import { caseStudiesLive, projects } from '@/content/projects';
 import './ProjectsSection.css';
 

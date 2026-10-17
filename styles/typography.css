@@ -1,0 +1,82 @@
+@layer base {
+    strong {
+        font-weight: 700;
+    }
+
+    small {
+        font-size: var(--small);
+        font-weight: 250;
+        letter-spacing: 0.05em;
+    }
+
+    ul {
+        margin-inline: 0;
+        padding-inline-start: 1.5em;
+    }
+
+    h1,
+    .h1 {
+        line-height: 1.1;
+        font-size: var(--h1);
+        font-weight: 100;
+    }
+
+    h2 {
+        line-height: 1.25;
+        font-size: var(--h2);
+        font-weight: 200;
+        letter-spacing: 0.05em;
+    }
+
+    h3,
+    h4,
+    h5,
+    h6,
+    p.title {
+        line-height: 1.25;
+        font-size: var(--h3);
+        font-weight: 300;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+    }
+
+    p.title {
+        font-size: var(--h4);
+    }
+
+    p.meta {
+        line-height: 1.5;
+        font-size: var(--small);
+        font-weight: 200;
+        opacity: 0.75;
+    }
+
+    p.eyebrow {
+        line-height: 1.15;
+        font-size: var(--small);
+        letter-spacing: 0.1em;
+        font-weight: 200; 
+        text-transform: uppercase; 
+    }
+
+    blockquote p {
+        font-style: italic;
+        font-size: 1.25rem;
+    }
+
+    cite {
+        display: block;
+        font-style: normal;
+        font-size: var(--small);
+        font-weight: 400;
+        opacity: 0.75;
+    }
+
+    hr {
+        max-width: 10ch;
+        margin-inline: auto;
+        border: 0;
+        border-block-start: 1px solid currentColor;
+        opacity: 0.75;
+    }
+}

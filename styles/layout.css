@@ -1,0 +1,24 @@
+@layer components {
+    .actions {
+        display: flex;
+        gap: var(--gap);
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .section {
+        position: relative;
+        view-timeline-name: --section-timeline;
+        view-timeline-axis: block;
+        view-timeline-inset: 50% 50%;
+    }
+
+    .section.first {
+        view-timeline-inset: 0;
+    }
+
+    .section.last {
+        view-timeline-inset: 0 50%;
+    }
+}

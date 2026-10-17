@@ -34,6 +34,11 @@
     position: relative;
 }
 
+/* One line in every font, so the swap to Commissioner can't re-wrap the name and shift the hero. */
+.hero h1 {
+    white-space: nowrap;
+}
+
 .hero .proof {
     display: flex;
     flex-wrap: wrap;
@@ -109,6 +114,9 @@
         align-self: start;
         padding: var(--padding) var(--padding) var(--padding) 0;
         animation-name: hero-image;
+        animation-timeline: --section-timeline;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
         animation-range: exit;
     }
 
@@ -119,6 +127,9 @@
         min-height: 100vh;
         padding: var(--padding-large) 0 var(--padding-large) var(--padding-large);
         animation-name: hero-main;
+        animation-timeline: --section-timeline;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
         animation-range: exit;
     }
 }

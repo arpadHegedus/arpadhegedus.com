@@ -1,0 +1,71 @@
+# Apache config for the static site (upload to the web root). nginx ignores this file.
+ErrorDocument 404 /404.html
+DirectoryIndex index.html
+Options -Indexes
+ServerSignature Off
+
+# Never serve dotfiles (.git, .env, ...) except the ACME folder used for certificate renewal.
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule "(^|/)\.(?!well-known/)" - [F,L]
+</IfModule>
+
+<IfModule mod_mime.c>
+    AddType image/webp .webp
+    AddType font/woff2 .woff2
+    AddType image/svg+xml .svg
+</IfModule>
+
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/xml application/javascript application/json image/svg+xml
+</IfModule>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    # Everything under _next/static has a content hash in its name, so it can be cached forever.
+    RewriteRule ^_next/static/ - [E=IMMUTABLE_ASSET:1]
+</IfModule>
+
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+    Header always set Cross-Origin-Opener-Policy "same-origin"
+    Header always set Cross-Origin-Resource-Policy "same-origin"
+    # HTTPS only. Raise to 2 years and add "; includeSubDomains" once every subdomain is HTTPS too.
+    Header always set Strict-Transport-Security "max-age=31536000"
+    Header unset X-Powered-By
+
+    # No inline scripts (the runtime is an external file; JSON-LD is data). Inline styles are allowed
+    # because Next inlines the CSS (inlineCss) and sets a few style attributes.
+    # Test changes with Content-Security-Policy-Report-Only first if you add third-party scripts.
+    Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests"
+
+    Header set Cache-Control "public, max-age=31536000, immutable" env=IMMUTABLE_ASSET
+
+    # HTML always revalidates so a new upload shows straight away.
+    <FilesMatch "\.html$">
+        Header set Cache-Control "no-cache"
+    </FilesMatch>
+</IfModule>
+
+<IfModule mod_headers.c>
+    <FilesMatch "\.(html|css|js|svg|xml|txt)$">
+        Header append Vary Accept-Encoding
+    </FilesMatch>
+</IfModule>
+
+# Optional: force HTTPS and one hostname. Enable once you know which host is canonical.
+# <IfModule mod_rewrite.c>
+#     RewriteCond %{HTTPS} off [OR]
+#     RewriteCond %{HTTP_HOST} ^www\. [NC]
+#     RewriteRule ^ https://arpadhegedus.com%{REQUEST_URI} [L,R=301]
+# </IfModule>
+
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/webp "access plus 30 days"
+    ExpiresByType image/svg+xml "access plus 30 days"
+    ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>

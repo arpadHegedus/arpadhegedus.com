@@ -43,3 +43,6 @@ next-env.d.ts
 # local-only working files: design sources, AI chats, CVs, old prototypes
 /.local/
 /.dev/
+
+# deployable zip made by `npm run package`
+/dist/

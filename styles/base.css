@@ -1,0 +1,34 @@
+@layer base {
+    html {
+        height: 100%;
+        max-width: 100vw;
+        overflow-x: hidden;
+    }
+
+    body {
+        padding-inline: var(--gutter);
+        min-height: 100%;
+        color: var(--base);
+        line-height: 1.75;
+        font-size: var(--body);
+        font-family: var(--font-commissioner), system-ui, sans-serif;
+        font-weight: 250;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background: var(--background);
+    }
+
+    img {
+        max-width: 100%;
+        display: block;
+        height: auto;
+    }
+
+    svg {
+        display: block;
+        fill: currentColor;
+        width: 1em;
+        height: 1em;
+        object-fit: contain;
+    }
+}

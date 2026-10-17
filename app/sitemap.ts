@@ -2,6 +2,8 @@ import type { MetadataRoute } from 'next';
 import { caseStudiesLive, projects } from '@/content/projects';
 import { profile } from '@/content/profile';
 
+export const dynamic = 'force-static';
+
 export default function sitemap(): MetadataRoute.Sitemap {
     return [
         { url: profile.siteUrl, changeFrequency: 'monthly', priority: 1 },

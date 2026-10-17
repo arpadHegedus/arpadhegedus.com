@@ -1,0 +1,32 @@
+@layer base {
+    /* Ambient glow: one large static radial gradient that drifts around the edges of
+       the viewport. It moves with transform so the animation stays on the compositor;
+       animating background-position instead repainted the whole viewport every frame. */
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        width: var(--glow-size);
+        height: var(--glow-size);
+        pointer-events: none;
+        background: radial-gradient(circle closest-side, var(--canvas), var(--background));
+        transform: translate3d(calc(50vw - var(--glow-size) / 2), calc(100vh - var(--glow-size) / 2), 0);
+        will-change: transform;
+        animation: elliptical-glow 15s ease-in-out infinite;
+    }
+
+    @keyframes elliptical-glow {
+        0%, 100% { transform: translate3d(calc(50vw - var(--glow-size) / 2), calc(100vh - var(--glow-size) / 2), 0); }
+        25% { transform: translate3d(calc(0px - var(--glow-size) / 2), calc(50vh - var(--glow-size) / 2), 0); }
+        50% { transform: translate3d(calc(50vw - var(--glow-size) / 2), calc(0px - var(--glow-size) / 2), 0); }
+        75% { transform: translate3d(calc(100vw - var(--glow-size) / 2), calc(50vh - var(--glow-size) / 2), 0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        body::before {
+            animation: none;
+        }
+    }
+}

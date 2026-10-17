@@ -1,0 +1,13 @@
+@layer reset {
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+        font: inherit;
+        padding: 0;
+        margin: 0;
+        transition-property: none;
+        transition-timing-function: ease-in-out;
+        transition-duration: 0.4s;
+    }
+}

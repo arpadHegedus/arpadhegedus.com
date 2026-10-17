@@ -1,0 +1,39 @@
+@layer reset, base, components;
+
+:root {
+    /* spacing */
+    --spacing: 1.5rem;
+    --gap: 1rem;
+    --gutter: clamp(1.5rem, 5vw + 0rem, 3rem);
+    --padding: clamp(1.5rem, 8.333vw + -1rem, 4rem);
+    --padding-large: clamp(1.5rem, 15vw + -3rem, 6rem);
+
+    /* type scale */
+    --body: clamp(0.875rem, 1.25vw + 0.625rem, 1rem);
+    --small: clamp(0.875rem, 0.86rem + 0.08vw, 0.95rem);
+    --h1: clamp(2.25rem, 1.7rem + 3vw, 5rem);
+    --h2: clamp(1.5rem, 1.5rem + 0.8vw, 2.5rem);
+    --h3: clamp(1.25rem, 1.25rem + 0.8vw, 1.5rem);
+    --h4: clamp(1.125rem, 1.125rem + 0.8vw, 1.25rem);
+
+    /* colour */
+    --base: #e6e6e6;
+    --canvas: #1b2527;
+    --off: #888;
+    --primary: #a8e0eb;
+    --primary-on: #62d7ee;
+    --background: #0b0f0f;
+
+    /* gradients */
+    --grad-accent-ocean: linear-gradient(135deg, #62d7ee 0%, #3b82f6 100%);
+    --grad-accent-mint: linear-gradient(135deg, #2dd4bf 0%, #62d7ee 100%);
+
+    /* elevation */
+    --shadow-modal: inset 0 1px 0 0 rgba(230, 230, 230, 0.05),
+                    0 20px 25px -5px rgba(0, 0, 0, 0.8),
+                    0 8px 10px -6px rgba(0, 0, 0, 0.7);
+    --glow-hover: 0 4px 20px 0 rgba(98, 215, 238, 0.3);
+
+    /* ambient background glow */
+    --glow-size: 160vmax;
+}

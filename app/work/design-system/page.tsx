@@ -1,4 +1,4 @@
-import CaseStudy, { caseStudyMetadata } from '@/components/CaseStudy';
+import CaseStudy, { caseStudyMetadata } from '@/components/case-study/CaseStudy';
 import { getProject } from '@/content/projects';
 
 const project = getProject('design-system');
